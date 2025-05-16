@@ -3,10 +3,6 @@ export default function VideoSection() {
   return (
     <section className="video-section">
       {/* Section label, centered as a pill */}
-      <div className="pill-section-header">
-        <span className="section-label">VIDEO</span>
-      </div>
-
       {/* Responsive video frame */}
       <div className="video-container">
         <iframe

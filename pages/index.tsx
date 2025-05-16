@@ -9,7 +9,6 @@ const Home: NextPage = () => {
     <>
       <div className="page-wrapper">
         <Hero />
-        <VideoSection />
         <ServicesSection />
       </div>
     </>
