@@ -19,8 +19,8 @@ body {
   min-height: 100%;
   margin: 0;
   padding: 0;
-  background-color: #000;     /* solid black edge-to-edge */
-  color: #fff;
+  background-color: #000000;     /* solid black edge-to-edge */
+  color: #ffffff;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   position: relative;         /* needed for body::before/after */
@@ -388,5 +388,559 @@ button {
 
   .service-card-enhanced {
     padding: 1.5rem;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Add these styles to your globals.css file */
+
+/* WhyScoringSection Styles */
+.why-scoring-section {
+  position: relative;
+  text-align: center;
+  background: #000;
+  background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(15,23,42,1) 100%);
+  overflow: hidden;
+}
+
+.why-scoring-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  padding: 2rem 0;
+  margin-top: 2rem;
+  text-align: left;
+}
+
+@media (min-width: 768px) {
+  .why-scoring-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+}
+
+/* Left content styling */
+.why-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  color: white;
+}
+
+.highlight-gradient {
+  background: linear-gradient(90deg, #7928CA, #FF0080);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.why-intro {
+  font-size: 1.125rem;
+  color: #d1d5db;
+  margin-bottom: 2.5rem;
+  max-width: 90%;
+}
+
+/* Issues styling */
+.issues-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.issue-card {
+  display: flex;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  transition: all 0.3s ease;
+}
+
+.issue-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.issue-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.issue-card:nth-child(1) .issue-icon {
+  color: #ef4444; /* Red */
+}
+
+.issue-card:nth-child(2) .issue-icon {
+  color: #f59e0b; /* Amber */
+}
+
+.issue-card:nth-child(3) .issue-icon {
+  color: #3b82f6; /* Blue */
+}
+
+.issue-content h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+.issue-content p {
+  font-size: 0.95rem;
+  color: #9ca3af;
+  line-height: 1.5;
+}
+
+/* CTA button */
+.score-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(90deg, #7928CA, #FF0080);
+  color: white;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.score-cta-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(121, 40, 202, 0.3);
+}
+
+.score-cta-btn .arrow {
+  margin-left: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.score-cta-btn:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* Right image styling */
+.why-scoring-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.phone-container {
+  position: relative;
+  padding: 1.5rem;
+}
+
+.phone-image {
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  transition: transform 0.5s ease;
+}
+
+.phone-container:hover .phone-image {
+  transform: translateY(-10px);
+}
+
+/* Score badges */
+.score-badge {
+  position: absolute;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  color: white;
+  font-size: 0.875rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.low-score {
+  background: rgba(220, 38, 38, 0.2);
+  border: 1px solid rgba(220, 38, 38, 0.4);
+  top: 10%;
+  left: 0;
+  transform: translateX(-30%);
+}
+
+.high-score {
+  background: rgba(5, 150, 105, 0.2);
+  border: 1px solid rgba(5, 150, 105, 0.4);
+  bottom: 10%;
+  right: 0;
+  transform: translateX(30%);
+}
+
+.score-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.score-label {
+  font-size: 0.75rem;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .why-title {
+    font-size: 2rem;
+  }
+
+  .why-intro {
+    font-size: 1rem;
+  }
+
+  .phone-container {
+    padding: 1rem;
+    margin-top: 1rem;
+  }
+
+  .low-score {
+    top: 5%;
+    left: 0;
+    transform: translateX(-15%);
+  }
+
+  .high-score {
+    bottom: 5%;
+    right: 0;
+    transform: translateX(15%);
+  }
+
+  .score-badge {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .score-value {
+    font-size: 1.1rem;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Add these styles to your globals.css file */
+
+/* Get Score Section Styles */
+.get-score-section {
+  position: relative;
+  background: #000;
+  background: linear-gradient(135deg, #000 0%, #0f172a 100%);
+  overflow: hidden;
+}
+
+/* Gradient background effect */
+.get-score-section::before {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  top: -200px;
+  right: -200px;
+  background: rgba(121, 40, 202, 0.2);
+  border-radius: 50%;
+  filter: blur(120px);
+  z-index: 0;
+}
+
+.get-score-section::after {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  bottom: -200px;
+  left: -100px;
+  background: rgba(59, 130, 246, 0.15);
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: 0;
+}
+
+/* Title styles */
+.score-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 1rem;
+  margin-top: 1.5rem;
+}
+
+.score-subtitle {
+  font-size: 1.125rem;
+  color: #d1d5db;
+  max-width: 700px;
+  margin: 0 auto 3rem;
+}
+
+/* Benefit items */
+.score-benefits {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+  font-size: 1rem;
+}
+
+.benefit-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Form styling */
+.score-form-container {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  padding: 2.5rem;
+  backdrop-filter: blur(10px);
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+.score-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group {
+  position: relative;
+}
+
+.form-input {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  border-radius: 0.5rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-input:focus {
+  border-color: rgba(59, 130, 246, 0.5);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
+}
+
+.form-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Step indicator styles */
+.step-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.step {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
+
+.step.active {
+  background: linear-gradient(90deg, #7928CA, #FF0080);
+}
+
+.step.completed {
+  background: #10b981;
+}
+
+.step-line {
+  flex: 1;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 0 10px;
+}
+
+.step-line.completed {
+  background: #10b981;
+}
+
+.step-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Navigation buttons */
+.form-nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.back-btn {
+  padding: 1rem 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  flex: 1;
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.submit-btn {
+  padding: 1rem 1.5rem;
+  background: linear-gradient(90deg, #7928CA, #FF0080);
+  color: white;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  height: 3.5rem; /* Fixed height to prevent layout shift during loading */
+  flex: 1;
+}
+
+.submit-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(121, 40, 202, 0.3);
+}
+
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Loading spinner */
+.loading-spinner {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Success message */
+.success-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+}
+
+.success-icon {
+  color: #10b981;
+  margin-bottom: 1.5rem;
+}
+
+.success-message h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.success-message p {
+  color: #d1d5db;
+  font-size: 1.125rem;
+}
+
+/* Privacy note */
+.privacy-note {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 1.5rem;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .score-title {
+    font-size: 2rem;
+  }
+
+  .score-subtitle {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .score-benefits {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .score-form-container {
+    padding: 1.5rem;
+  }
+
+  .form-nav-buttons {
+    flex-direction: column;
   }
 }

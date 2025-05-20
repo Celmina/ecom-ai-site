@@ -4,7 +4,7 @@ const services = [
   {
     Icon: Cpu,
     title: "AEO Audit",
-    desc: "Full audit & schema injection—zero hassle.",
+    desc: "Full audit & schema injection - zero hassle.",
     color: "#7928CA",
   },
   {
@@ -22,7 +22,7 @@ const services = [
   {
     Icon: Database,
     title: "Schema & Q&A",
-    desc: "Auto JSON-LD + Q&A markup for all AI UIs.",
+    desc: "AI-ranking done for you",
     color: "#00DFD8",
   },
 ];
