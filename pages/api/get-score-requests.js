@@ -21,15 +21,28 @@ export default async function handler(req, res) {
     let submissionIds = [];
     try {
       const result = await client.get("score_requests_list");
-      console.log("Submission IDs:", result);
+      console.log("Result from database:", result);
 
       // Check if the result is in { ok: true, value: [...] } format
       if (result && result.ok === true && Array.isArray(result.value)) {
         submissionIds = result.value;
-      }
+        console.log("Found submission IDs in .value property:", submissionIds);
+      } 
       // Or if it's a direct array
       else if (Array.isArray(result)) {
         submissionIds = result;
+        console.log("Found submission IDs directly:", submissionIds);
+      }
+      // If it's an object with other properties that might contain our array
+      else if (result && typeof result === 'object') {
+        // Try to find an array property
+        for (const key in result) {
+          if (Array.isArray(result[key])) {
+            submissionIds = result[key];
+            console.log(`Found submission IDs in .${key} property:`, submissionIds);
+            break;
+          }
+        }
       }
     } catch (e) {
       console.log("Error fetching submission IDs:", e);
@@ -52,14 +65,14 @@ export default async function handler(req, res) {
         console.log(`Fetched data for ${id}:`, result);
 
         // Check if the result is in { ok: true, value: {...} } format
-        if (result && result.ok === true) {
+        if (result && result.ok === true && result.value) {
           submissions.push({
             id,
             ...result.value,
           });
-        }
+        } 
         // Or if it's the data directly
-        else if (result && typeof result === "object") {
+        else if (result && typeof result === 'object' && !result.ok) {
           submissions.push({
             id,
             ...result,
@@ -69,6 +82,8 @@ export default async function handler(req, res) {
         console.error(`Error fetching submission ${id}:`, error);
       }
     }
+
+    console.log(`Successfully retrieved ${submissions.length} submissions`);
 
     // Sort by creation date, newest first
     submissions.sort((a, b) => {

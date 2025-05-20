@@ -1,12 +1,12 @@
 // pages/api/submit-score-request.js
 
 export default async function handler(req, res) {
-  console.log("Submit request received", req.method);
-  console.log("Request body:", req.body);
-
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method not allowed" });
   }
+
+  console.log("Submit request received", req.method);
+  console.log("Request body:", req.body);
 
   const { url, email, name } = req.body;
   console.log("Extracted form data:", { url, email, name });
@@ -40,16 +40,27 @@ export default async function handler(req, res) {
     await client.set(submissionId, submissionData);
     console.log("Submission data stored successfully");
 
-    // Get the current list or initialize it
+    // Get all current submission IDs
     let submissionsList = [];
+
     try {
+      // Try to get the existing list
       const currentList = await client.get("score_requests_list");
-      if (currentList && Array.isArray(currentList)) {
+      console.log("Current submissions list from DB:", currentList);
+
+      // Check different possible formats
+      if (currentList && currentList.ok === true && Array.isArray(currentList.value)) {
+        submissionsList = currentList.value;
+      } else if (Array.isArray(currentList)) {
         submissionsList = currentList;
+      } else {
+        // If not found or not an array, create a new empty array
+        submissionsList = [];
       }
     } catch (e) {
+      console.log("Error fetching submissions list:", e);
       console.log("Initializing new submissions list");
-      // If there's an error or the list doesn't exist, start with an empty array
+      submissionsList = [];
     }
 
     console.log("Current submissions list:", submissionsList);

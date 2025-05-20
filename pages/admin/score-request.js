@@ -1,6 +1,14 @@
 // pages/admin/score-request.js
 import { useState, useEffect } from "react";
-import { ArrowDownCircle, RefreshCw, Edit2, Eye, Mail, ExternalLink, Search } from "lucide-react";
+import {
+  ArrowDownCircle,
+  RefreshCw,
+  Edit2,
+  Eye,
+  Mail,
+  ExternalLink,
+  Search,
+} from "lucide-react";
 import Head from "next/head";
 
 export default function ScoreRequestsAdmin() {
@@ -48,16 +56,17 @@ export default function ScoreRequestsAdmin() {
       // Filter by search term
       if (searchTerm) {
         const term = searchTerm.toLowerCase();
-        result = result.filter(req => 
-          req.url.toLowerCase().includes(term) || 
-          req.name.toLowerCase().includes(term) || 
-          req.email.toLowerCase().includes(term)
+        result = result.filter(
+          (req) =>
+            req.url.toLowerCase().includes(term) ||
+            req.name.toLowerCase().includes(term) ||
+            req.email.toLowerCase().includes(term),
         );
       }
 
       // Filter by status
       if (selectedStatus !== "all") {
-        result = result.filter(req => req.status === selectedStatus);
+        result = result.filter((req) => req.status === selectedStatus);
       }
 
       setFilteredRequests(result);
@@ -71,12 +80,12 @@ export default function ScoreRequestsAdmin() {
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return date.toLocaleString('en-GB', { 
-      day: '2-digit', 
-      month: '2-digit', 
-      year: 'numeric',
-      hour: '2-digit', 
-      minute: '2-digit'
+    return date.toLocaleString("en-GB", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
     });
   };
 
@@ -122,7 +131,7 @@ export default function ScoreRequestsAdmin() {
         },
         body: JSON.stringify({
           id,
-          status: newStatus
+          status: newStatus,
         }),
       });
 
@@ -131,9 +140,11 @@ export default function ScoreRequestsAdmin() {
       }
 
       // Update local state to reflect the change
-      setRequests(requests.map(req => 
-        req.id === id ? { ...req, status: newStatus } : req
-      ));
+      setRequests(
+        requests.map((req) =>
+          req.id === id ? { ...req, status: newStatus } : req,
+        ),
+      );
 
       setEditingId(null);
     } catch (err) {
@@ -148,15 +159,15 @@ export default function ScoreRequestsAdmin() {
   };
 
   const getStatusBadgeClass = (status) => {
-    switch(status) {
-      case 'pending':
-        return 'bg-yellow-800 text-yellow-200';
-      case 'completed':
-        return 'bg-green-800 text-green-200';
-      case 'rejected':
-        return 'bg-red-800 text-red-200';
+    switch (status) {
+      case "pending":
+        return "bg-yellow-800 text-yellow-200";
+      case "completed":
+        return "bg-green-800 text-green-200";
+      case "rejected":
+        return "bg-red-800 text-red-200";
       default:
-        return 'bg-gray-800 text-gray-200';
+        return "bg-gray-800 text-gray-200";
     }
   };
 
@@ -173,9 +184,15 @@ export default function ScoreRequestsAdmin() {
           <div className="flex justify-between items-center">
             <div className="text-2xl font-bold">ecom.ai</div>
             <div className="flex space-x-8">
-              <a href="/" className="text-gray-300 hover:text-white">Features</a>
-              <a href="/" className="text-gray-300 hover:text-white">Pricing</a>
-              <a href="/" className="text-gray-300 hover:text-white">Contact</a>
+              <a href="/" className="text-gray-300 hover:text-white">
+                Features
+              </a>
+              <a href="/" className="text-gray-300 hover:text-white">
+                Pricing
+              </a>
+              <a href="/" className="text-gray-300 hover:text-white">
+                Contact
+              </a>
             </div>
           </div>
         </div>
@@ -184,7 +201,9 @@ export default function ScoreRequestsAdmin() {
       <main className="container mx-auto px-6 py-10">
         {!isAuthenticated ? (
           <div className="max-w-md mx-auto bg-gray-800 rounded-lg shadow-lg border border-gray-700 p-8">
-            <h2 className="text-2xl font-bold mb-6 text-center">Authentication Required</h2>
+            <h2 className="text-2xl font-bold mb-6 text-center">
+              Authentication Required
+            </h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label className="block text-gray-300 mb-2" htmlFor="apiKey">
@@ -219,7 +238,9 @@ export default function ScoreRequestsAdmin() {
             {/* Dashboard Header */}
             <div className="mb-10">
               <h1 className="text-4xl font-bold mb-3">Score Requests Admin</h1>
-              <p className="text-gray-400 text-lg">Manage and track AEO score requests</p>
+              <p className="text-gray-400 text-lg">
+                Manage and track AEO score requests
+              </p>
             </div>
 
             {/* Stats Cards */}
@@ -233,13 +254,19 @@ export default function ScoreRequestsAdmin() {
               {/* Pending Requests Card */}
               <div className="bg-gray-800 rounded-lg shadow p-6 border border-gray-700">
                 <h3 className="text-gray-400 text-lg mb-2">Pending Requests</h3>
-                <div className="text-3xl font-bold">{requests.filter(r => r.status === 'pending').length}</div>
+                <div className="text-3xl font-bold">
+                  {requests.filter((r) => r.status === "pending").length}
+                </div>
               </div>
 
               {/* Completed Requests Card */}
               <div className="bg-gray-800 rounded-lg shadow p-6 border border-gray-700">
-                <h3 className="text-gray-400 text-lg mb-2">Completed Requests</h3>
-                <div className="text-3xl font-bold">{requests.filter(r => r.status === 'completed').length}</div>
+                <h3 className="text-gray-400 text-lg mb-2">
+                  Completed Requests
+                </h3>
+                <div className="text-3xl font-bold">
+                  {requests.filter((r) => r.status === "completed").length}
+                </div>
               </div>
             </div>
 
@@ -274,19 +301,56 @@ export default function ScoreRequestsAdmin() {
                     <option value="completed">Completed</option>
                     <option value="rejected">Rejected</option>
                   </select>
-
                   <button
                     onClick={refreshData}
                     className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg flex items-center justify-center"
                   >
                     <RefreshCw size={18} className="mr-2" /> Refresh
                   </button>
-
                   <button
                     onClick={exportToCSV}
                     className="bg-green-600 hover:bg-green-700 text-white py-3 px-4 rounded-lg flex items-center justify-center"
                   >
                     <ArrowDownCircle size={18} className="mr-2" /> Export CSV
+                  </button>
+                  // Add this inside your admin dashboard component, within the
+                  controls section
+                  <button
+                    onClick={async () => {
+                      try {
+                        // Generate test data
+                        const testData = {
+                          url: `https://test-${Date.now()}.com`,
+                          email: `test-${Date.now()}@example.com`,
+                          name: `Test User ${Date.now()}`,
+                        };
+
+                        // Submit test request
+                        const response = await fetch(
+                          "/api/submit-score-request",
+                          {
+                            method: "POST",
+                            headers: {
+                              "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(testData),
+                          },
+                        );
+
+                        if (!response.ok) {
+                          throw new Error("Failed to create test request");
+                        }
+
+                        // Refresh the data to show the new request
+                        refreshData();
+                        alert("Test request created successfully!");
+                      } catch (error) {
+                        alert("Error creating test request: " + error.message);
+                      }
+                    }}
+                    className="bg-purple-600 hover:bg-purple-700 text-white py-3 px-4 rounded-lg flex items-center justify-center"
+                  >
+                    Create Test Request
                   </button>
                 </div>
               </div>
@@ -294,7 +358,9 @@ export default function ScoreRequestsAdmin() {
 
             {/* Requests Table */}
             <div className="bg-gray-800 rounded-lg shadow border border-gray-700 overflow-hidden">
-              <h2 className="text-xl font-semibold p-6 border-b border-gray-700">All Requests</h2>
+              <h2 className="text-xl font-semibold p-6 border-b border-gray-700">
+                All Requests
+              </h2>
 
               {loading ? (
                 <div className="p-10 text-center">
@@ -304,8 +370,10 @@ export default function ScoreRequestsAdmin() {
               ) : filteredRequests.length === 0 ? (
                 <div className="p-10 text-center">
                   <p className="text-gray-400 mb-2">No score requests found.</p>
-                  {searchTerm || selectedStatus !== 'all' ? (
-                    <p className="text-sm text-gray-500">Try changing your search filters</p>
+                  {searchTerm || selectedStatus !== "all" ? (
+                    <p className="text-sm text-gray-500">
+                      Try changing your search filters
+                    </p>
                   ) : null}
                 </div>
               ) : (
@@ -318,43 +386,51 @@ export default function ScoreRequestsAdmin() {
                         <th className="px-6 py-4 font-medium">Email</th>
                         <th className="px-6 py-4 font-medium">Date</th>
                         <th className="px-6 py-4 font-medium">Status</th>
-                        <th className="px-6 py-4 font-medium text-right">Actions</th>
+                        <th className="px-6 py-4 font-medium text-right">
+                          Actions
+                        </th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-700">
                       {filteredRequests.map((req) => (
-                        <tr 
-                          key={req.id} 
-                          className="hover:bg-gray-750"
-                        >
+                        <tr key={req.id} className="hover:bg-gray-750">
                           <td className="px-6 py-4">
-                            <a 
-                              href={req.url} 
-                              target="_blank" 
-                              rel="noopener noreferrer" 
+                            <a
+                              href={req.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
                               className="text-blue-400 hover:text-blue-300 flex items-center"
                             >
-                              <span className="truncate max-w-[200px] block">{req.url}</span>
-                              <ExternalLink size={14} className="ml-1 flex-shrink-0" />
+                              <span className="truncate max-w-[200px] block">
+                                {req.url}
+                              </span>
+                              <ExternalLink
+                                size={14}
+                                className="ml-1 flex-shrink-0"
+                              />
                             </a>
                           </td>
                           <td className="px-6 py-4">{req.name}</td>
                           <td className="px-6 py-4">
-                            <a 
-                              href={`mailto:${req.email}`} 
+                            <a
+                              href={`mailto:${req.email}`}
                               className="text-blue-400 hover:text-blue-300 flex items-center"
                             >
                               {req.email}
                               <Mail size={14} className="ml-1 flex-shrink-0" />
                             </a>
                           </td>
-                          <td className="px-6 py-4">{formatDate(req.createdAt)}</td>
+                          <td className="px-6 py-4">
+                            {formatDate(req.createdAt)}
+                          </td>
                           <td className="px-6 py-4">
                             {editingId === req.id ? (
-                              <select 
+                              <select
                                 className="px-3 py-2 bg-gray-700 text-white border border-gray-600 rounded"
                                 defaultValue={req.status}
-                                onChange={(e) => updateRequestStatus(req.id, e.target.value)}
+                                onChange={(e) =>
+                                  updateRequestStatus(req.id, e.target.value)
+                                }
                                 disabled={updatingStatus}
                               >
                                 <option value="pending">Pending</option>
@@ -362,8 +438,11 @@ export default function ScoreRequestsAdmin() {
                                 <option value="rejected">Rejected</option>
                               </select>
                             ) : (
-                              <span className={`px-3 py-1 rounded text-xs font-medium ${getStatusBadgeClass(req.status)}`}>
-                                {req.status.charAt(0).toUpperCase() + req.status.slice(1)}
+                              <span
+                                className={`px-3 py-1 rounded text-xs font-medium ${getStatusBadgeClass(req.status)}`}
+                              >
+                                {req.status.charAt(0).toUpperCase() +
+                                  req.status.slice(1)}
                               </span>
                             )}
                           </td>
@@ -402,11 +481,17 @@ export default function ScoreRequestsAdmin() {
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div>
-              <p className="text-gray-400">© 2025 ecom.ai. All rights reserved.</p>
+              <p className="text-gray-400">
+                © 2025 ecom.ai. All rights reserved.
+              </p>
             </div>
             <div className="mt-4 md:mt-0 flex space-x-6">
-              <a href="/privacy" className="text-gray-400 hover:text-white">Privacy Policy</a>
-              <a href="/terms" className="text-gray-400 hover:text-white">Terms of Service</a>
+              <a href="/privacy" className="text-gray-400 hover:text-white">
+                Privacy Policy
+              </a>
+              <a href="/terms" className="text-gray-400 hover:text-white">
+                Terms of Service
+              </a>
             </div>
           </div>
         </div>
