@@ -29,6 +29,8 @@ export default function GetScoreSection() {
     }
   };
 
+  // In components/GetScoreSection.js, update the handleFinalSubmit function
+
   const handleFinalSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);

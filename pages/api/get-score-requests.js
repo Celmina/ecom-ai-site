@@ -18,35 +18,51 @@ export default async function handler(req, res) {
     console.log("Database client created successfully");
 
     console.log("Fetching submission IDs...");
-    let submissionIds;
+    let submissionIds = [];
     try {
-      submissionIds = await client.get("score_requests_list");
-      console.log("Submission IDs:", submissionIds);
+      const result = await client.get("score_requests_list");
+      console.log("Submission IDs:", result);
+
+      // Check if the result is in { ok: true, value: [...] } format
+      if (result && result.ok === true && Array.isArray(result.value)) {
+        submissionIds = result.value;
+      }
+      // Or if it's a direct array
+      else if (Array.isArray(result)) {
+        submissionIds = result;
+      }
     } catch (e) {
       console.log("Error fetching submission IDs:", e);
-      submissionIds = [];
     }
 
-    // Check if submissionIds is a valid array
-    if (
-      !submissionIds ||
-      !Array.isArray(submissionIds) ||
-      submissionIds.ok === false
-    ) {
+    // If no valid submission IDs were found
+    if (!submissionIds || submissionIds.length === 0) {
       console.log("No valid submissions found, returning empty array");
       return res.status(200).json([]);
     }
 
-    console.log("Found valid submission IDs, fetching details...");
+    console.log("Found valid submission IDs:", submissionIds);
+    console.log("Fetching details for each submission...");
+
     const submissions = [];
 
     for (const id of submissionIds) {
       try {
-        const data = await client.get(id);
-        if (data && data.ok !== false) {
+        const result = await client.get(id);
+        console.log(`Fetched data for ${id}:`, result);
+
+        // Check if the result is in { ok: true, value: {...} } format
+        if (result && result.ok === true) {
           submissions.push({
             id,
-            ...data,
+            ...result.value,
+          });
+        }
+        // Or if it's the data directly
+        else if (result && typeof result === "object") {
+          submissions.push({
+            id,
+            ...result,
           });
         }
       } catch (error) {

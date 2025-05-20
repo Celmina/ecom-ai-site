@@ -1,19 +1,15 @@
 // pages/api/submit-score-request.js
 
-  // pages/api/submit-score-request.js
-  // Add more debug logs
+export default async function handler(req, res) {
+  console.log("Submit request received", req.method);
+  console.log("Request body:", req.body);
 
-  export default async function handler(req, res) {
-    console.log("Submit request received", req.method);
-    console.log("Request body:", req.body);
-
-    if (req.method !== "POST") {
-      return res.status(405).json({ message: "Method not allowed" });
-    }
-
-    const { url, email, name } = req.body;
-    console.log("Extracted form data:", { url, email, name });
+  if (req.method !== "POST") {
+    return res.status(405).json({ message: "Method not allowed" });
   }
+
+  const { url, email, name } = req.body;
+  console.log("Extracted form data:", { url, email, name });
 
   // Validate data
   if (!url || !email || !name) {
