@@ -178,26 +178,6 @@ export default function ScoreRequestsAdmin() {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      {/* Header */}
-      <header className="bg-gray-800 border-b border-gray-700 py-6">
-        <div className="container mx-auto px-6">
-          <div className="flex justify-between items-center">
-            <div className="text-2xl font-bold">ecom.ai</div>
-            <div className="flex space-x-8">
-              <a href="/" className="text-gray-300 hover:text-white">
-                Features
-              </a>
-              <a href="/" className="text-gray-300 hover:text-white">
-                Pricing
-              </a>
-              <a href="/" className="text-gray-300 hover:text-white">
-                Contact
-              </a>
-            </div>
-          </div>
-        </div>
-      </header>
-
       <main className="container mx-auto px-6 py-10">
         {!isAuthenticated ? (
           <div className="max-w-md mx-auto bg-gray-800 rounded-lg shadow-lg border border-gray-700 p-8">
@@ -313,8 +293,7 @@ export default function ScoreRequestsAdmin() {
                   >
                     <ArrowDownCircle size={18} className="mr-2" /> Export CSV
                   </button>
-                  // Add this inside your admin dashboard component, within the
-                  controls section
+
                   <button
                     onClick={async () => {
                       try {
@@ -476,26 +455,6 @@ export default function ScoreRequestsAdmin() {
           </div>
         )}
       </main>
-
-      <footer className="bg-gray-800 border-t border-gray-700 mt-20 py-8">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div>
-              <p className="text-gray-400">
-                © 2025 ecom.ai. All rights reserved.
-              </p>
-            </div>
-            <div className="mt-4 md:mt-0 flex space-x-6">
-              <a href="/privacy" className="text-gray-400 hover:text-white">
-                Privacy Policy
-              </a>
-              <a href="/terms" className="text-gray-400 hover:text-white">
-                Terms of Service
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

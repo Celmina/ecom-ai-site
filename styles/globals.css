@@ -14,27 +14,28 @@
   box-sizing: border-box;
 }
 
-html,
+/* Create a smooth background for the entire page */
+html, 
 body {
   min-height: 100%;
   margin: 0;
   padding: 0;
-  background-color: #000000;     /* solid black edge-to-edge */
+  background: linear-gradient(135deg, #000000 0%, #0f172a 100%);
   color: #ffffff;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   line-height: 1.5;
-  position: relative;         /* needed for body::before/after */
-  overflow-x: hidden;         /* prevent glows from creating a scrollbar */
+  overflow-x: hidden;
 }
 
+/* Fixed background glows */
 body::before {
   content: "";
-  position: absolute;
+  position: fixed; /* Changed from absolute to fixed */
   top: -10%;
   left: -10%;
   width: 665px;
   height: 585px;
-  background: rgba(125, 155, 255, 0.47);
+  background: rgba(125, 155, 255, 0.15);
   border-radius: 50%;
   filter: blur(125px);
   pointer-events: none;
@@ -43,18 +44,40 @@ body::before {
 
 body::after {
   content: "";
-  position: absolute;
-  top: 30%;
-  right: -20%;
+  position: fixed; /* Changed from absolute to fixed */
+  bottom: -10%;
+  right: -10%;
   width: 565px;
   height: 500px;
-  background: rgba(125, 155, 255, 0.47);
+  background: rgba(125, 155, 255, 0.15);
   border-radius: 50%;
   filter: blur(125px);
   pointer-events: none;
   z-index: 0;
 }
 
+/* Make all sections transparent */
+section {
+  position: relative;
+  z-index: 1;
+  background-color: transparent !important; /* Force transparent background */
+}
+
+/* Remove all section-specific backgrounds */
+.services-section,
+.get-score-section,
+.why-scoring-section,
+.video-section {
+  background: transparent !important;
+}
+
+/* Remove section before/after backgrounds */
+.get-score-section::before,
+.get-score-section::after,
+.why-scoring-section::before,
+.why-scoring-section::after {
+  display: none !important; /* Remove section-specific background elements */
+}
 
 a {
   color: inherit;
@@ -73,8 +96,9 @@ button {
 .header {
   padding: 1rem;
   padding-bottom: 3rem;
- 
+  background: transparent;
 }
+
 .container {
   max-width: 960px;
   margin: 0 auto;
@@ -82,10 +106,12 @@ button {
   justify-content: space-between;
   align-items: center;
 }
+
 .logo {
   font-size: 1.5rem;
   font-weight: bold;
 }
+
 .nav a {
   margin-left: 1rem;
   font-size: 1rem;
@@ -97,8 +123,6 @@ button {
 }
 
 
-
-
 /* Hero Section – exact match to Screenshot 1 */
 .hero {
   position: relative;
@@ -108,9 +132,8 @@ button {
   justify-content: center;
   overflow: hidden;
   z-index: 1;
+  background: transparent;
 }
-
-
 
 .hero-content {
   position: relative;
@@ -141,6 +164,7 @@ button {
   gap: 0.5rem;
   margin-top: 1rem;
 }
+
 .logo-text {
   font-size: 70px;
   font-weight: 600;
@@ -168,18 +192,17 @@ button {
   text-decoration: none;
   transition: opacity 0.2s;
 }
+
 .btn:hover {
   opacity: 0.9;
 }
 
 
-
-
-
 /* Video Section */
 .video-section {
   position: relative;
-  padding-bottom: 5rem;           /* extra top/bottom spacing */
+  padding-bottom: 5rem;
+  background: transparent !important;
 }
 
 .pill-section-header {
@@ -218,7 +241,7 @@ button {
 /* Footer */
 .footer {
   padding: 2rem 1rem;
-  background: transparent;      /* let the gradient show through */
+  background: transparent !important;
 }
 
 .footer-container {
@@ -262,13 +285,6 @@ button {
 }
 
 
-
-
-
-
-
-
-
 /* Enhanced Services Section */
 .services-section {
   position: relative;
@@ -276,6 +292,12 @@ button {
   text-align: center;
   z-index: 1;
   overflow: hidden;
+  background: transparent !important;
+}
+
+/* Remove service background glow */
+.service-bg-glow {
+  display: none;
 }
 
 .services-title {
@@ -299,6 +321,8 @@ button {
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  position: relative;
+  z-index: 2;
 }
 
 .service-card-enhanced {
@@ -365,17 +389,6 @@ button {
   height: 180px;
 }
 
-.service-bg-glow {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background: radial-gradient(circle at 20% 80%, rgba(121, 40, 202, 0.15), transparent 40%),
-              radial-gradient(circle at 80% 40%, rgba(0, 112, 243, 0.15), transparent 40%);
-  z-index: -1;
-}
-
 /* Responsive styles */
 @media (max-width: 768px) {
   .services-grid {
@@ -391,25 +404,14 @@ button {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-/* Add these styles to your globals.css file */
-
 /* WhyScoringSection Styles */
 .why-scoring-section {
   position: relative;
   text-align: center;
-  background: #000;
-  background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(15,23,42,1) 100%);
+  background: transparent !important; /* Remove gradient background */
   overflow: hidden;
+  padding: 8rem 0; /* Add consistent padding */
+  margin-top: -4rem; /* Create overlap with previous section */
 }
 
 .why-scoring-grid {
@@ -636,61 +638,60 @@ button {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-/* Add these styles to your globals.css file */
-
 /* Get Score Section Styles */
 .get-score-section {
   position: relative;
-  background: #000;
-  background: linear-gradient(135deg, #000 0%, #0f172a 100%);
+  background: transparent !important;
   overflow: hidden;
+  min-height: 100vh; /* Ensure full viewport height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
 }
 
-/* Gradient background effect */
-.get-score-section::before {
-  content: "";
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  top: -200px;
-  right: -200px;
-  background: rgba(121, 40, 202, 0.2);
-  border-radius: 50%;
-  filter: blur(120px);
-  z-index: 0;
-}
-
-.get-score-section::after {
-  content: "";
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  bottom: -200px;
-  left: -100px;
-  background: rgba(59, 130, 246, 0.15);
-  border-radius: 50%;
-  filter: blur(100px);
-  z-index: 0;
+.get-score-section .container {
+  width: 100%;
+  z-index: 2;
+  padding: 2rem;
 }
 
 /* Title styles */
-.score-title {
-  font-size: 2.5rem;
+.get-score-section .score-title {
+  font-size: 2.75rem;
   font-weight: 700;
   color: white;
-  margin-bottom: 1rem;
-  margin-top: 1.5rem;
+  margin-bottom: 1.25rem;
+  margin-top: 0;
+  line-height: 1.2;
+}
+
+.get-score-section .score-subtitle {
+  font-size: 1.25rem;
+  color: #d1d5db;
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  line-height: 1.6;
+}
+
+.get-score-section .score-form-container {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  padding: 2.5rem;
+  backdrop-filter: blur(10px);
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.get-score-section .score-benefits {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
 }
 
 .score-subtitle {
@@ -943,4 +944,38 @@ button {
   .form-nav-buttons {
     flex-direction: column;
   }
+
+  .get-score-section .score-title {
+    font-size: 2rem;
+  }
+
+  .get-score-section .score-subtitle {
+    font-size: 1rem;
+  }
+
+  .get-score-section .score-form-container {
+    padding: 1.5rem;
+  }
+
+  .get-score-section .score-benefits {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+
+/* Add smooth section transitions */
+.services-section,
+.why-scoring-section,
+.get-score-section {
+  position: relative;
+  z-index: 1;
+  padding: 8rem 0;
+}
+
+/* Create a subtle overlap between sections */
+.services-section + section,
+.why-scoring-section + section,
+.get-score-section + section {
+  margin-top: -4rem;
 }
