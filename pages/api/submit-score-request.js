@@ -1,12 +1,19 @@
 // pages/api/submit-score-request.js
 
-export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ message: "Method not allowed" });
-  }
+  // pages/api/submit-score-request.js
+  // Add more debug logs
 
-  const { url, email, name } = req.body;
-  console.log("Received form data:", { url, email, name });
+  export default async function handler(req, res) {
+    console.log("Submit request received", req.method);
+    console.log("Request body:", req.body);
+
+    if (req.method !== "POST") {
+      return res.status(405).json({ message: "Method not allowed" });
+    }
+
+    const { url, email, name } = req.body;
+    console.log("Extracted form data:", { url, email, name });
+  }
 
   // Validate data
   if (!url || !email || !name) {
@@ -14,7 +21,6 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Import the database client correctly
     console.log("Importing Replit database client...");
     const Database = await import("@replit/database");
     console.log("Creating database client...");
@@ -31,17 +37,25 @@ export default async function handler(req, res) {
       email,
       name,
       createdAt: new Date().toISOString(),
-      status: "pending", // For tracking assessment status
+      status: "pending",
     };
 
     console.log("Storing submission data:", submissionData);
     await client.set(submissionId, submissionData);
     console.log("Submission data stored successfully");
 
-    // Optionally, also store a list of all submissions for easy retrieval
-    // First, get the current list (or create an empty array if it doesn't exist)
-    console.log("Fetching existing submissions list...");
-    let submissionsList = (await client.get("score_requests_list")) || [];
+    // Get the current list or initialize it
+    let submissionsList = [];
+    try {
+      const currentList = await client.get("score_requests_list");
+      if (currentList && Array.isArray(currentList)) {
+        submissionsList = currentList;
+      }
+    } catch (e) {
+      console.log("Initializing new submissions list");
+      // If there's an error or the list doesn't exist, start with an empty array
+    }
+
     console.log("Current submissions list:", submissionsList);
 
     // Add the new submission ID to the list
