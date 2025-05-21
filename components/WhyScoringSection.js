@@ -1,5 +1,6 @@
 // components/WhyScoringSection.js
 import Image from "next/image";
+import Link from "next/link";
 import { AlertTriangle, Clock, TrendingDown } from "lucide-react";
 
 export default function WhyScoringSection() {
@@ -67,9 +68,9 @@ export default function WhyScoringSection() {
               </div>
             </div>
 
-            <a href="/get-score" className="score-cta-btn">
+            <Link href="/get-score" className="score-cta-btn">
               Get Your Score <span className="arrow">→</span>
-            </a>
+            </Link>
           </div>
 
           {/* Right image */}

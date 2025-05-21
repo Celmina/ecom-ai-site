@@ -113,7 +113,7 @@ export default function GetScoreSection() {
                   <CheckCircle size={60} className="success-icon" />
                   <h3>AEO Assessment Request Received!</h3>
                   <p>
-                    We'll analyze your store and send your score within 24
+                    We&apos;ll analyze your store and send your score within 24
                     hours.
                   </p>
                 </div>
